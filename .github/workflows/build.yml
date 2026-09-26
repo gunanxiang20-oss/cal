@@ -15,6 +15,13 @@ jobs:
           sudo apt-get install -y build-essential ccache git libffi-dev libssl-dev python3-dev openjdk-17-jdk unzip automake autoconf libtool pkg-config zlib1g-dev libncurses5-dev cmake
           pip install buildozer cython==0.29.36
           pip install cython
+      - name: Enable Swap Space
+        run: |
+    sudo fallocate -l 4G /swapfile
+    sudo chmod 600 /swapfile
+    sudo mkswap /swapfile
+    sudo swapon /swapfile
+    sudo swapon --show
       - name: Build APK
         run: |
           yes | buildozer android debug
